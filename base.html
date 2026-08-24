@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ data.name }} | AI Portfolio Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Background Design Elements -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow-spot glow-pink"></div>
+    <div class="bg-glow-spot glow-blue"></div>
+    <div class="bg-glow-spot glow-purple"></div>
+    <div class="glass-sphere sphere-1"></div>
+    <div class="glass-sphere sphere-2"></div>
+    <div class="glass-sphere sphere-3"></div>
+
+    <!-- SVG Crystal Left -->
+    <svg class="bg-crystal crystal-left" width="120" height="200" viewBox="0 0 120 200">
+        <polygon points="60,10 90,60 60,80 30,60" fill="url(#grad-top)" />
+        <polygon points="90,60 110,120 60,150 60,80" fill="url(#grad-right)" />
+        <polygon points="30,60 60,80 60,150 10,120" fill="url(#grad-left)" />
+        <polygon points="60,150 110,120 60,190" fill="url(#grad-bot-right)" />
+        <polygon points="60,150 60,190 10,120" fill="url(#grad-bot-left)" />
+        <defs>
+            <linearGradient id="grad-top" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#d4d4d8" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#a1a1aa" stop-opacity="0.6"/>
+            </linearGradient>
+            <linearGradient id="grad-right" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#71717a" stop-opacity="0.7"/>
+                <stop offset="100%" stop-color="#e4e4e7" stop-opacity="0.7"/>
+            </linearGradient>
+            <linearGradient id="grad-left" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#d4d4d8" stop-opacity="0.5"/>
+            </linearGradient>
+            <linearGradient id="grad-bot-right" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3f3f46" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#52525b" stop-opacity="0.9"/>
+            </linearGradient>
+            <linearGradient id="grad-bot-left" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#a1a1aa" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#71717a" stop-opacity="0.8"/>
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- SVG Crystal Right -->
+    <svg class="bg-crystal crystal-right" width="80" height="150" viewBox="0 0 80 150">
+        <polygon points="40,8 60,45 40,60 20,45" fill="url(#grad-top-r)" />
+        <polygon points="60,45 73,90 40,112 40,60" fill="url(#grad-right-r)" />
+        <polygon points="20,45 40,60 40,112 7,90" fill="url(#grad-left-r)" />
+        <polygon points="40,112 73,90 40,142" fill="url(#grad-bot-right-r)" />
+        <polygon points="40,112 40,142 7,90" fill="url(#grad-bot-left-r)" />
+        <defs>
+            <linearGradient id="grad-top-r" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#52525b" stop-opacity="0.7"/>
+                <stop offset="100%" stop-color="#d4d4d8" stop-opacity="0.7"/>
+            </linearGradient>
+            <linearGradient id="grad-right-r" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#e4e4e7" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#a1a1aa" stop-opacity="0.6"/>
+            </linearGradient>
+            <linearGradient id="grad-left-r" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#d4d4d8" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#71717a" stop-opacity="0.6"/>
+            </linearGradient>
+            <linearGradient id="grad-bot-right-r" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#71717a" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#e4e4e7" stop-opacity="0.8"/>
+            </linearGradient>
+            <linearGradient id="grad-bot-left-r" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3f3f46" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#a1a1aa" stop-opacity="0.9"/>
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Custom Cursor elements -->
+    <div class="cursor-outer" id="cursorOuter"></div>
+    <div class="cursor-inner" id="cursorInner"></div>
+
+    <div class="app-container">
+
+        <!-- Sidebar Navigation Capsule -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#home" class="active" data-tooltip="Home"><i class="fas fa-home"></i></a></li>
+                    <li><a href="#about" data-tooltip="Profile"><i class="fas fa-user-astronaut"></i></a></li>
+                    <li><a href="#projects" data-tooltip="My Recent Work"><i class="fas fa-project-diagram"></i></a></li>
+                    <li><a href="#experience" data-tooltip="Logbook"><i class="fas fa-history"></i></a></li>
+                    <li><a href="#contact" data-tooltip="Connect"><i class="fas fa-envelope-open-text"></i></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="system-status">
+                    <div class="status-dot"></div>
+                    SYSTEM OPERATIONAL // {{ data.title | upper }}
+                </div>
+
+            </header>
+
+            {% block content %}{% endblock %}
+
+            <footer style="margin-top: 8rem; padding-bottom: 3rem; border-top: 1px solid var(--glass-border); padding-top: 3.5rem; text-align: center;">
+                <!-- Floating Social Network List -->
+                <div class="footer-social-float">
+                    {% for link in data.social_links %}
+                    <a href="{{ link.url }}" target="_blank" class="social-circle-btn" title="{{ link.name }}">
+                        <i class="{{ link.icon }}"></i>
+                    </a>
+                    {% endfor %}
+                </div>
+                <p style="font-size: 0.75rem; color: var(--text-secondary); letter-spacing: 2px; margin-top: 1.8rem;">
+                    &copy; 2026 {{ data.name | upper }} // SECURED CONNECTION
+                </p>
+            </footer>
+        </main>
+    </div>
+
+
+
+    <script>
+        // ---- Minimal Dot + Circle Cursor ----
+        const cursorOuter = document.getElementById('cursorOuter');
+        const cursorInner = document.getElementById('cursorInner');
+        let mouseX = 0, mouseY = 0;
+        let outerX = 0, outerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorInner.style.left = mouseX + 'px';
+            cursorInner.style.top  = mouseY + 'px';
+        });
+
+        function animateCursor() {
+            outerX += (mouseX - outerX) * 0.18;
+            outerY += (mouseY - outerY) * 0.18;
+            cursorOuter.style.left = outerX + 'px';
+            cursorOuter.style.top  = outerY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Keep cursor size constant — no scale change on hover
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    const id = entry.target.getAttribute('id');
+                    document.querySelectorAll('.sidebar-nav a').forEach(a => {
+                        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('section').forEach(section => observer.observe(section));
+
+        // Form Submission Logic
+        async function handleContactSubmit(event) {
+            event.preventDefault();
+            const btn = event.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = 'TRANSMITTING...';
+            btn.disabled = true;
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+
+            try {
+                const response = await fetch('/submit-contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                const data = await response.json();
+                alert(data.message);
+                event.target.reset();
+            } catch (error) {
+                alert('Transmission failed. Please try again.');
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        // Falling Translucent Bubbles Generator
+        function createFallingBubbles() {
+            const container = document.body;
+            const bubbleCount = 20;
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('falling-bubble');
+                
+                // Random size between 4px and 12px
+                const size = Math.random() * 8 + 4;
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                
+                // Random horizontal position (0% to 100%)
+                bubble.style.left = Math.random() * 100 + 'vw';
+                
+                // Random opacity
+                bubble.style.opacity = Math.random() * 0.4 + 0.15;
+                
+                // Set animation speed and delay
+                const duration = Math.random() * 12 + 12; // 12s to 24s
+                const delay = Math.random() * -24; // negative delay starts animation instantly at offset Y
+                
+                bubble.style.animation = `fall ${duration}s linear infinite`;
+                bubble.style.animationDelay = delay + 's';
+                
+                container.appendChild(bubble);
+            }
+        }
+        createFallingBubbles();
+
+        // 3D Flip Card Logic
+        document.querySelectorAll('.btn-flip').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Ensure click on icon inside button works by finding closest button
+                const button = e.target.closest('.btn-flip');
+                const flipInner = button.closest('.flip-inner');
+                if (flipInner) {
+                    flipInner.classList.add('flipped');
+                }
+            });
+        });
+
+        document.querySelectorAll('.btn-flip-back').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const button = e.target.closest('.btn-flip-back');
+                const flipInner = button.closest('.flip-inner');
+                if (flipInner) {
+                    flipInner.classList.remove('flipped');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
